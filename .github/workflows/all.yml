@@ -1,0 +1,23 @@
+name: all in one 
+on: push
+jobs:
+    All:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: 16
+            - name: Install dependencies
+              run: npm install
+            - name: lint
+              run: npm run lint
+            - name: Build the application
+              run: npm run build
+            - name: Run tests
+              run: npm test
+            - name: Deploy
+              run: echo "Deploying..."
+
