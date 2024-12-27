@@ -1,0 +1,27 @@
+name: Trigger on Issues
+on: 
+    issues:
+        types:
+        - opened
+        - edited
+        - labeled
+        - closed
+        - transferred
+jobs:
+    working:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: 16
+            - name: Install dependencies
+              run: npm install
+            - name: Echo issue details
+              run: |
+                echo "Issue Number: ${{ github.event.issue.number }}"
+                echo "Issue Title: ${{ github.event.issue.title }}"
+                echo "Issue State: ${{ github.event.issue.state }}"
+                echo "Issue Labels: ${{ github.event.issue.labels }}"              
